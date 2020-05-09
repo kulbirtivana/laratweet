@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\FollowUnfollow;
 use Illuminate\Http\Request;
 use Auth;
-use App\tweet;
+use App\Tweet;
 use App\profile;
 use App\User;
 use App\Comment;

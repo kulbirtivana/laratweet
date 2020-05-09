@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use App\tweet;
+use App\Tweet;
 use App\profile;
 use App\User;
 use App\Comment;
@@ -21,10 +21,10 @@ class TasksController extends Controller
     public function index()
     {
         //
-       $tweets = tweet::query()
+       $tweets = Tweet::query()
 
         ->join('users', 'tweets.profile_id', '=', 'users.id')
-        ->select('tweets.id', 'users.id as user_id', 'tweets.message', 'tweets.is_gif', 'users.name')
+        ->select('tweets.id', 'users.id as user_id', 'tweets.message', 'users.name')
         ->get();
         return view('tweet.index', compact('tweets'));
 
@@ -90,7 +90,7 @@ class TasksController extends Controller
         $validatedData = $request->validate(array(
             'message' => 'required|max:255'
         ));
-        $profile = profile::where("user_id", "=", $user->id)->firstOrFail();
+        $profile = Profile::where("user_id", "=", $user->id)->firstOrFail();
         $tweet = new tweet;
         $tweet->profile_id = $profile->id;
         $tweet->message = $validatedData['message'];
@@ -113,9 +113,9 @@ class TasksController extends Controller
     public function show($id)
     {
         //
-        $tweet = tweet::findOrFail($id);
+        $tweet = Tweet::findOrFail($id);
 
-        $profile = profile::findOrFail($tweet->profile_id);
+        $profile = Profile::findOrFail($tweet->profile_id);
         return view('tweet.show', compact('tweet'),
         compact('profile'));
     }
@@ -129,7 +129,7 @@ class TasksController extends Controller
     {
         //
         if($user = Auth::user()){
-            $tweet = tweet::findOrFail($id);
+            $tweet = Tweet::findOrFail($id);
             return view('tweet.edit',compact('tweet'));
         }
         return redirect('/tweet');
@@ -145,7 +145,7 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $tweet = tweet::findOrFail($id);
+        $tweet = Tweet::findOrFail($id);
 
         if( $user = Auth::user()){
         $validatedData = $request->validate(array(
@@ -179,7 +179,7 @@ class TasksController extends Controller
     {
         //
         if($user = Auth::user()){
-            $tweet = tweet::findOrFail($id);
+            $tweet = Tweet::findOrFail($id);
             $tweet->delete();
             return redirect('/tweet')->with('success', 'Tweet deleted');
         }
@@ -188,7 +188,7 @@ class TasksController extends Controller
 
     public function showProfile($id)
     {
-        $profiles = profile::query()
+        $profiles = Profile::query()
         ->join('tweets', 'tweets.profile_id', '=', 'profiles.id')
         ->get();
     }

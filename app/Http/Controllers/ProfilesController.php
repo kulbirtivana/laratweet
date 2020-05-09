@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\tweet;
+use App\Tweet;
 use App\User;
 use Auth;
 use App\profile;
@@ -25,7 +25,7 @@ class ProfilesController extends Controller
         ->join( 'users', 'profiles.user_id', '=', 'users.id' )
         ->get();
 
-        $tweets = tweet::all();
+        $tweets = Tweet::all();
 
         return view('profiles.index', compact('profiles', 'tweets'));
 
@@ -89,8 +89,8 @@ class ProfilesController extends Controller
         $user = Auth::user();
 
         $profile = profile::findOrFail($id);
-        $tweet = tweet::findOrFail($id);
-        $tweets = tweet::query()
+        $tweet = Tweet::findOrFail($id);
+        $tweets = Tweet::query()
         ->join('profiles', 'tweets.profile_id', '=', 'profiles.id')
         ->select( 'tweets.id',
             'profiles.id as profile_ID',

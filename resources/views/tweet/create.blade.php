@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 @section('title')
 	Create Tweet Form
 	@endsection
@@ -8,16 +8,16 @@
 
 	@include('partials.errors')
 
-	<div id="app" >
+<!-- 	<div id="app" >
 		<tweet-create-form 
 			v-model="message"
 			submission-url="{{ route( 'tweet.store') }}">
 			@csrf
 		</tweet-create-form>
 	<Giphy v-on:image-clicked="imageClicked"/>
-	</div>
+	</div> -->
 
-<!-- <form method="post" action="{{ route('tweet.store')}}" enctype="multipart/form-data">
+<form method="post" action="{{ route('tweet.store')}}" enctype="multipart/form-data">
 	@csrf
 	<label for ="message">
 		<strong>Input a Message:</strong>
@@ -29,10 +29,10 @@
     <input type="file" name="picture" id="picture">
 	</label>
 	
-<input type="submit" Value="Publish Tweet">
- <div class="form-group container h-100">
+<!-- <input type="submit" Value="Publish Tweet">
+ --> <div class="form-group container h-100">
         <input class="btn btn-primary btn-customized align-bottom" type="submit" value="Publish Post">
     </div>
 
-	</form> -->
+	</form>
 	@endsection

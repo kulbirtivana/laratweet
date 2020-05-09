@@ -1,6 +1,10 @@
-
-const myHeading = $( 'h2');
-console.log( myHeading);
+// import * as ScrollMagic from "scrollmagic"; // Or use scrollmagic-with-ssr to avoid server rendering problems
+// import { TweenMax, TimelineMax, Linear } from "gsap"; // Also works with TweenLite and TimelineLite
+// import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+// ScrollMagic.Scene.addIndicators = require("scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators");
+// ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax); 
+// const myHeading = $( 'h2');
+// console.log( myHeading);
 
 const myListings = $( '.featuresall');
 const myListItemPs = $( '.feature1');
@@ -19,12 +23,9 @@ if (clickedElementP.is( ':hidden')){
 }
 });
 
-
-
-
 //ScrollMagic
 
-		$(function () { // wait for document ready
+		// $(function () { // wait for document ready
 		// init
 		var controller = new ScrollMagic.Controller();
 
@@ -56,4 +57,25 @@ if (clickedElementP.is( ':hidden')){
 			.setTween(wipeAnimation)
 			.addIndicators() // add indicators (requires plugin)
 			.addTo(controller);
-	});
+	// });
+
+
+		// var slideIndex = 0;
+		// showSlides();
+
+		// function showSlides() {
+		//   var i;
+		//   var slides = document.getElementsByClassName("mySlides");
+		//   var dots = document.getElementsByClassName("dot");
+		//   for (i = 0; i < slides.length; i++) {
+		//     slides[i].style.display = "none";  
+		//   }
+		//   slideIndex++;
+		//   if (slideIndex > slides.length) {slideIndex = 1}    
+		//   for (i = 0; i < dots.length; i++) {
+		//     dots[i].className = dots[i].className.replace(" active", "");
+		//   }
+		//   slides[slideIndex-1].style.display = "block";  
+		//   dots[slideIndex-1].className += " active";
+		//   setTimeout(showSlides, 2000); // Change image every 2 seconds
+		// }

@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('title')
-Twitter
+LaraTweet
 @endsection
 
 @section('content')

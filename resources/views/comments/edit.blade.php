@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('title')
 Edit Comment
@@ -12,7 +12,35 @@ Edit Comment
 @include('partials.errors')
 
 
-<form method="post" action="{{ route( 'comments.update', $comment->id) }}">
+<div class="container-fluid">
+    <div class="row h-100 justify-content-center align-items-center">
+
+
+        <section>
+            @if( $comment->is_gif == TRUE )
+            <figure>
+                <img src="{{ $comment->content }}">
+            </figure>
+            @else
+            <p>
+                {{ $comment->content }}
+            </p>
+            @endif
+        </section>
+
+        <a href="#" id="reply"></a>
+
+
+        <div class="float-right" id="app">
+            <comment-edit-form submission-url="{{ route( 'comments.update', $comment->id) }}" v-model="content">
+                @csrf
+                @method('PATCH')
+            </comment-edit-form>
+            <Giphy v-on:image-clicked="imageClicked" />
+        </div>
+    </div>
+
+<!-- <form method="post" action="{{ route( 'comments.update', $comment->id) }}">
 
 <div class="form-group">
 
@@ -30,7 +58,7 @@ Edit Comment
     <div class="form-group container h-80">
     <input class="btn btn-success" type="submit" value="Update your comment">
     </div>
-    </form> 
+    </form>  -->
 
     <div class="form-group container h-100">
         <form action="{{ route('comments.destroy', $comment->id) }}" method="post">

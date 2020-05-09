@@ -26,6 +26,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "laravel-mix-scrollmagic-gsap": "^0.1.1"
+        "laravel-mix-scrollmagic-gsap": "^0.1.1",
+        "scrollmagic-plugin-gsap": "^1.0.4"
     }
 }

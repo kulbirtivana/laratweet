@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\tweet;
 use Auth;
-use App\Profile;
+use App\Tweet;
+use App\User;
 use App\Comment;
+use App\Profile;
+
 
 class CommentController extends Controller
 {
@@ -52,6 +54,13 @@ class CommentController extends Controller
         ));
             $input = $request->all();
             $input['user_id'] = auth()->user()->id;
+             $input['tweet_id'] = $request->input('tweet_id');
+
+        if ( isset($input['is_gif']  ) && ($input['is_gif'] === 'true') ) {
+
+            $input['is_gif'] = 1;
+
+        }
 
             Comment::create($input);
 
@@ -71,7 +80,9 @@ class CommentController extends Controller
         //
         $comment = Comment::findOrFail($id);
         $tweet = tweet::findOrFail($id);
-        $profileUser = profile::findOrFail($tweet->profile_id)
+
+        $user = User::findOrFail( $tweet->user_id);
+        // $profileUser = profile::findOrFail($tweet->profile_id)
        //$profileUser = $profile->user()->get()[0];
         return view('comments.show', compact('comment'));
     }
@@ -87,6 +98,13 @@ class CommentController extends Controller
         //
         if ($user = Auth::user()){
             $comment = Comment::findOrFail($id);
+
+             $profile = Profile::where("user_id", "=", $user->id)->firstOrFail(); 
+
+            if ( isset($comment->is_gif ) && ($comment->is_gif === 'true') ) {
+         
+                $comment->is_gif = 1;
+            }
 
             return view('comments.edit', compact('comment'));
         }

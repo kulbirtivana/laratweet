@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('title')
 Edit Tweet
@@ -9,7 +9,7 @@ Edit Tweet
 {{--display errors--}}
 @include('partials.errors')
 
-<div id="app">
+<!-- <div id="app">
 		<tweet-edit-form
 			v-model="message"
 			submission-url="{{ route( 'tweet.update', $tweet->id)  }}"
@@ -19,8 +19,8 @@ Edit Tweet
 		</tweet-edit-form>
 	<Giphy v-on:image-clicked="imageClicked"/>
 	</div>
-
-<!-- <form method="post" action="{{ route('tweet.update', $tweet->id) }}">
+ -->
+<form method="post" action="{{ route('tweet.update', $tweet->id) }}">
 	@csrf
 	@method('PATCH')
 	<label for="message">
@@ -34,5 +34,5 @@ Edit Tweet
 		<input type="text" name="author" id="author" value="{{ $tweet->author }}">
 	</label>--}}
 
-	</form> -->
+	</form>
 @endsection
