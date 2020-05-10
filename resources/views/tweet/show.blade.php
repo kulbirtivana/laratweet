@@ -7,9 +7,12 @@ Show Tweet
 
 @include('partials.errors')
 
-<h2>{{$profile->name}}</h2>
-<p>
-  <strong> Post: </strong>
+<!-- <div class="card">
+  <div class="card-header">
+
+        <h2>{{$profile->name ?? ''}}</h2>
+            <p>
+              <strong> Post: </strong>
                     <br>
                     <div class="card-body"> 
                     <p>{{ $tweet->content }}</p>
@@ -18,25 +21,15 @@ Show Tweet
 
     @include('tweet.commentsDisplay', ['comments' => $tweet->comments, 'tweet_id' => $tweet->id])
 
-    <section>
-            @if( $comment->is_gif == TRUE )
-            <figure>
-                <img src="{{ $comment->content }}">
-            </figure>
-            @else
-            <p>
-                {{ $comment->content }}
-            </p>
-            @endif
-    </section>
+
                     
-     <a href="{{route('comments.show', $post->id)}}" id="reply"></a>
+     <a href="{{route('comments.show', $tweet->id)}}" id="reply"></a>
                     
                     <div id="app">
-                        <comment-create-form submission-url="{{route('comments.store')}}" comment-id="{{ $comment->id }}" post-id="{{ $post->id }}" v-model="content">
+                        <comment-create-form submission-url="{{route('comments.store')}}" tweet-id="{{ $tweet->id }}" v-model="content">
                             @csrf
                         </comment-create-form>
                         <Giphy v-on:image-clicked="imageClicked"/>
                     </div>
-                    
-@endsection
+
+@endsection -->

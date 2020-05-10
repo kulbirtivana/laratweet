@@ -6,7 +6,7 @@
       <div class="col-md-12">
         <img :src="content" />
         <button type="button" class="btn" @click="resetMessage">Reset</button>
-        <input type="hidden" name="post_id" :value="postId" />
+        <input type="hidden" name="tweet_id" :value="tweetId" />
         <input type="hidden" name="parent_id" :value="commentId" />
         <input type="hidden" name="content" v-model="content" />
         <input type="hidden" name="is_gif" :value="isGif" />
@@ -18,7 +18,7 @@
         <div class="form-group">
           <strong>New Comment</strong>
                 <input type="text" name="content"  class="form-control" v-model="content" />
-              <input type="hidden" name="post_id" :value="postId"  />
+              <input type="hidden" name="tweet_id" :value="tweetId"  />
         <input type="hidden" name="parent_id" :value="commentId" />
     
         </div>
@@ -37,7 +37,7 @@
 <script>
 export default {
   name: "comment-create-form",
-  props: ["submissionUrl", "postId", "commentId"],
+  props: ["submissionUrl", "tweetId", "commentId"],
   computed: {
     content: {
       get() {

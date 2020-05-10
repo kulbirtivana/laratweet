@@ -21,11 +21,10 @@ class TasksController extends Controller
     public function index()
     {
         //
-       $tweets = Tweet::query()
+        //    $tweets = tweet::query()
+        // ->join('users', 'tweets.profile_id', '=', 'users.id')->get()->simplePaginate(15);
 
-        ->join('users', 'tweets.profile_id', '=', 'users.id')
-        ->select('tweets.id', 'users.id as user_id', 'tweets.message', 'users.name')
-        ->get();
+        $tweets = tweet::paginate(10);
         return view('tweet.index', compact('tweets'));
 
         // if( $user = Auth::user() )

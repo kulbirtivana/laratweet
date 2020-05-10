@@ -202,21 +202,22 @@
             }
 
             #pinContainer {
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             overflow: hidden;
-            -webkit-perspective: 1000;
-            perspective: 1000;
-            }
+/*            -webkit-perspective: 1000;
+*//*            perspective: 1000;
+*/            }
             #slideContainer {
                 width: 400%; /* to contain 4 panels, each with 100% of window width */
                 height: 100%;
             }
             .panel {
                 height: 100%;
-                width: 25%; /* relative to parent -> 25% of 400% = 100% of window width */
-                float: left;
-            }
+                width: 100%; /* relative to parent -> 25% of 400% = 100% of window width */
+                position: absolute;
+/*                float: left;
+*/            }
 
             .footer{
                 text-align: center;
@@ -303,8 +304,9 @@
     <section class="benefits">Benefits
         <div id="pinContainer">
 <!--             <div id="slideContainer">
- -->                <section class="panel blue">
+ -->                <section class="panel">
                     <b>ONE</b>
+                    <img src="images/promote.png" alt="Promotion" title="Promotion of products/services">
                 </section>
                 <section class="panel turqoise">
                     <b>TWO</b>
