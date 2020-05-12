@@ -5,23 +5,35 @@ Show Tweet
 @endsection
 @section('content')
 
-@include('partials.errors')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
 
-<!-- <div class="card">
-  <div class="card-header">
+                    @include('partials.errors')
 
-        <h2>{{$profile->name ?? ''}}</h2>
-            <p>
-              <strong> Post: </strong>
+                    <h2>{{$profile->username ?? ''}}</h2>
+                    <p>
+                       <strong> Post: </strong>
                     <br>
                     <div class="card-body"> 
                     <p>{{ $tweet->content }}</p>
-</p>
-    <h4>Display Comments</h4>
+                    </p>
+                        <h4>Display Comments</h4>
+                        @include('tweet.commentsDisplay', ['comments' => $tweet->comments, 'tweet_id' => $tweet->id])
 
-    @include('tweet.commentsDisplay', ['comments' => $tweet->comments, 'tweet_id' => $tweet->id])
-
-
+                         <section>
+                            @if( $comment->is_gif == TRUE )
+                            <figure>
+                                <img src="{{ $comment->content }}">
+                            </figure>
+                            @else
+                            <p>
+                                {{ $comment->content }}
+                            </p>
+                            @endif
+                            </section>
                     
      <a href="{{route('comments.show', $tweet->id)}}" id="reply"></a>
                     
@@ -30,6 +42,11 @@ Show Tweet
                             @csrf
                         </comment-create-form>
                         <Giphy v-on:image-clicked="imageClicked"/>
-                    </div>
+                </div>
+            </div>
 
-@endsection -->
+        </div>
+    </div>
+</div>
+
+@endsection

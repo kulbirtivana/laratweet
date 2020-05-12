@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class FollowUnfollow extends Model
 {
     //
-    protected $fillable = ['profile_id', 'follower_id', 'followed'];
+    protected $fillable = ['user_id', 'follower_id', 'followed'];
 
-    protected $primarykey = 'profile_id';
+    protected $primarykey = 'user_id';
 
     public function profiles()
     {
-    	return $this->belongsTo(profile::class);
+    	return $this->belongsTo(User::class);
     }
 }

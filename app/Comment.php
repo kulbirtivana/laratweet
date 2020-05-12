@@ -12,11 +12,11 @@ class Comment extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    protected $fillable =['profile_id', 'tweet_id', 'parent_id', 'message'];
+    protected $fillable =['user_id', 'tweet_id', 'parent_id', 'message', 'is_gif'];
 
     public function profiles()
     {
-    	return $this->belongsTo('App\Profile');
+    	return $this->belongsTo('App\User');
     }
 
     public function tweets()

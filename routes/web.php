@@ -22,24 +22,29 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::post('/tweet/{id}/act', 'LikeController@actOnTweet');
+Route::get('tweet/like/{id}', ['as' => 'tweet.like', 'uses' => 'LikeController@likeTweet']);
 
-Route::get('profile/{profileId}/follow', 'FollowUnfollowController@followProfile')->name('profile.follow');
 
-Route::get('/{profileId}/unfollow', 'FollowUnfollowController@unfollowProfile')->name('profile.unfollow');
+Route::get('/tweets/{id}/act', ['as' => 'comment.like', 'uses' => 'LikeController@likeComment']);
+
+Route::post('/like', 'TasksController@getlike');
+
+
+Route::post('/like/{id}', 'TasksController@like');
 
 
 Route::get('profile/{id}', 'ProfilesController@showPost');
 
 // Route::get('tweet/{id}', 'TasksController@showProfile');
 
-Route::get('comment/like/{id}', ['as' => 'comment.like', 'uses' => 'LikeController@likeComment']);
-
-Route::get('tweet/like/{id}', ['as' => 'tweet.like', 'uses' => 'LikeController@likePost']);
-
-
-Route::get('tweets/{tweet}/profiles/{profile}/comments/{comment}', function ($tweetId, $profileId, $commentId) {} );
-
 Route::resource('tweet', 'TasksController');
+
 Route::resource('profiles', 'ProfilesController');
+
 Route::resource('comments', 'CommentController');
+
+Route::post('/comment/store', 'CommentController@store')->name('comment.add');
+
+// Route::post('/reply/store', 'CommentController@replyStore')->name('reply.add');
+
 

@@ -79,7 +79,7 @@ class CommentController extends Controller
     {
         //
         $comment = Comment::findOrFail($id);
-        $tweet = tweet::findOrFail($id);
+        $tweet = Tweet::findOrFail($id);
 
         $user = User::findOrFail( $tweet->user_id);
         // $profileUser = profile::findOrFail($tweet->profile_id)

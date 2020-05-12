@@ -20,7 +20,7 @@ class TweetsTableSeeder extends Seeder
             DB::table( 'tweets')->insert(array(
                 'message' => $faker->paragraph,
                 'photo' => $faker->imageURL($width = 600, $height = 480),
-                'profile_id' => $faker->randomElement(profile::pluck( 'id' )->toArray()), 
+                'user_id' => $faker->randomElement(User::pluck( 'id' )->toArray()), 
                 'likes_count' => $faker->randomDigitNotNull,
                 'posted_at' => $faker->dateTimeThisYear(),
 

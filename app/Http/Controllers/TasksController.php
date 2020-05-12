@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Tweet;
-use App\profile;
+use App\Profile;
 use App\User;
 use App\Comment;
 use App\FollowUnfollow; 
@@ -24,7 +24,7 @@ class TasksController extends Controller
         //    $tweets = tweet::query()
         // ->join('users', 'tweets.profile_id', '=', 'users.id')->get()->simplePaginate(15);
 
-        $tweets = tweet::paginate(10);
+        $tweets = Tweet::paginate(10);
         return view('tweet.index', compact('tweets'));
 
         // if( $user = Auth::user() )
@@ -91,10 +91,8 @@ class TasksController extends Controller
         ));
         $profile = Profile::where("user_id", "=", $user->id)->firstOrFail();
         $tweet = new tweet;
-        $tweet->profile_id = $profile->id;
+        $tweet->usere_id = $user->id;
         $tweet->message = $validatedData['message'];
-        if ( isset ( $request->is_gif) && ( $request->is_gif === 'true' )) {
-            $input['is_gif'] = 1;
         }
         $tweet->save();  
  
@@ -114,9 +112,12 @@ class TasksController extends Controller
         //
         $tweet = Tweet::findOrFail($id);
 
-        $profile = Profile::findOrFail($tweet->profile_id);
-        return view('tweet.show', compact('tweet'),
-        compact('profile'));
+        $comment = new Comment();
+
+        $user = User::findOrFail($tweet->user_id);
+
+        $profile = Profile::where("user_id", "=", "$user->id")->firstOrFail();
+        return view('tweet.show', compact('tweet', 'comment', 'profile', 'user');
     }
 
          //* Show the form for editing the specified resource.
@@ -153,13 +154,13 @@ class TasksController extends Controller
 
         tweet::whereId($id)->update($validatedData);
 
-        if ( isset ( $request->is_gif) && ( $request->is_gif === 'true' )) {
-            $tweet->is_gif = TRUE;
-        }
-        else
-        $tweet->is_gif = FALSE;
+        // if ( isset ( $request->is_gif) && ( $request->is_gif === 'true' )) {
+        //     $tweet->is_gif = TRUE;
+        // }
+        // else
+        // $tweet->is_gif = FALSE;
 
-        $tweet->save(); 
+        // $tweet->save(); 
         
         return redirect('/tweet')->with('success', 'Tweet Updated');
     }
@@ -185,10 +186,23 @@ class TasksController extends Controller
         return redirect('/tweet');
     }
 
-    public function showProfile($id)
+    public function getlike(Request $request)
     {
-        $profiles = Profile::query()
-        ->join('tweets', 'tweets.profile_id', '=', 'profiles.id')
-        ->get();
+        $tweet = Tweet::find($request->tweet);
+        return response()->json([
+            'tweet' => $tweet,
+        ]);
+    }
+
+    public function like(Request $request)
+    {
+        $tweet = Tweet::find($request->tweet);
+        $value = $tweet->like;
+        $tweet->like = $value + 1;
+        $tweet->save();
+        return response()->json([
+            'message' => 'Thanks',
+        ])
+    }
     }
 }

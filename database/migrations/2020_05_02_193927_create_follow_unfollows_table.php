@@ -16,7 +16,7 @@ class CreateFollowUnfollowsTable extends Migration
          Schema::create('follow_unfollow', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('follower_id')->nullable();
-            $table->unsignedBigInteger('profile_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->boolean('followed')->nullable();
             $table->timestamps();
 

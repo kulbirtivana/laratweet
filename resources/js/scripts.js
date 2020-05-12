@@ -23,59 +23,41 @@ if (clickedElementP.is( ':hidden')){
 }
 });
 
-//ScrollMagic
+		// var controller = new ScrollMagic.Controller();
 
-		// $(function () { // wait for document ready
+		// var wipeAnimation = new TimelineMax()
+		// .fromTo("section.panel.turqoise", 1, {x: "-100%"}, {x: "0%", ease: Linear.easeNone})  // in from left
+		// 	.fromTo("section.panel.green",    1, {x:  "100%"}, {x: "0%", ease: Linear.easeNone})  // in from right
+		// 	.fromTo("section.panel.bordeaux", 1, {y: "-100%"}, {y: "0%", ease: Linear.easeNone}); // in f
+	
+		// new ScrollMagic.Scene({
+		// 		triggerElement: "#pinContainer",
+		// 		triggerHook: "onLeave",
+		// 		duration: "500%"
+		// 	})
+		// 	.setPin("#pinContainer")
+		// 	.setTween(wipeAnimation)
+		// 	.addIndicators() // add indicators (requires plugin)
+		// 	.addTo(controller);
+
+// wait for document ready
 		// init
+		// $(function () { 
 		var controller = new ScrollMagic.Controller();
+	 	var wipeAnimation = new TimelineMax()
+	 	.fromTo(".one", 1, {x:"-100%"}, {x:"0%"})
+		.fromTo(".two", 1, {x:"-100%"}, {x:"0%"} )
+		.fromTo(".three", 1, {y:"-100%"}, {y:"0%"} )
+		.fromTo(".four", 1, {x:"100%"}, {x:"0%"} )
 
-		// define movement of panels
-		var wipeAnimation = new TimelineMax()
-		.fromTo("section.panel.turqoise", 1, {x: "-100%"}, {x: "0%", ease: Linear.easeNone})  // in from left
-			.fromTo("section.panel.green",    1, {x:  "100%"}, {x: "0%", ease: Linear.easeNone})  // in from right
-			.fromTo("section.panel.bordeaux", 1, {y: "-100%"}, {y: "0%", ease: Linear.easeNone}); // in f
-			// animate to second panel
-			// .to("#slideContainer", 0.5, {z: -150})		// move back in 3D space
-			// .to("#slideContainer", 1,   {x: "-25%"})	// move in to first panel
-			// .to("#slideContainer", 0.5, {z: 0})				// move back to origin in 3D space
-			// // animate to third panel
-			// .to("#slideContainer", 0.5, {z: -150, delay: 1})
-			// .to("#slideContainer", 1,   {x: "-50%"})
-			// .to("#slideContainer", 0.5, {z: 0})
-			// // animate to forth panel
-			// .to("#slideContainer", 0.5, {z: -150, delay: 1})
-			// .to("#slideContainer", 1,   {x: "-75%"})
-			// .to("#slideContainer", 0.5, {z: 0});
+		var scene = new ScrollMagic.Scene({
+					triggerElement: "#container",
+					triggerHook: "onLeave",
+					duration: "500%"
+		})
+		.setPin("#container")
+		.setTween(wipeAnimation)
+		.addIndicators() 
+		.addTo(controller);
 
-		// create scene to pin and link animation
-		new ScrollMagic.Scene({
-				triggerElement: "#pinContainer",
-				triggerHook: "onLeave",
-				duration: "500%"
-			})
-			.setPin("#pinContainer")
-			.setTween(wipeAnimation)
-			.addIndicators() // add indicators (requires plugin)
-			.addTo(controller);
-	// });
-
-
-		// var slideIndex = 0;
-		// showSlides();
-
-		// function showSlides() {
-		//   var i;
-		//   var slides = document.getElementsByClassName("mySlides");
-		//   var dots = document.getElementsByClassName("dot");
-		//   for (i = 0; i < slides.length; i++) {
-		//     slides[i].style.display = "none";  
-		//   }
-		//   slideIndex++;
-		//   if (slideIndex > slides.length) {slideIndex = 1}    
-		//   for (i = 0; i < dots.length; i++) {
-		//     dots[i].className = dots[i].className.replace(" active", "");
-		//   }
-		//   slides[slideIndex-1].style.display = "block";  
-		//   dots[slideIndex-1].className += " active";
-		//   setTimeout(showSlides, 2000); // Change image every 2 seconds
-		// }
+			// });

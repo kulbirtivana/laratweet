@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('title')
 View Comments
@@ -13,7 +13,7 @@ View Comments
 
     <strong> Username: </strong>
     
-    <h5> {{ $profile->name }} </h5>
+    <h5> {{ $profile->username }} </h5>
 
     <p>{{ $tweet->content }}</p>
 

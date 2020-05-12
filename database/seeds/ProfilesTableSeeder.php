@@ -18,7 +18,7 @@ class ProfilesTableSeeder extends Seeder
 
         foreach(range(1, 30) as $index ){
         	DB::table( 'profiles' )->insert(array(
-        		'name' => $faker->name,
+        		'username' => $faker->name,
         		'photo' => $faker->imageUrl(600, 400),
         		'about_user' => $faker->paragraph,
                 'user_id' => $faker->unique()->randomElement(User::pluck('id')->toArray()),

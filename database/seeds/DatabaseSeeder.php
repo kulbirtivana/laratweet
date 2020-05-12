@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call( (new UserSeeder())->run());
         $this->call( (new ProfilesTableSeeder())->run());
         $this->call( (new TweetsTableSeeder())->run());
-        $this->call( (new CommentsTableSeeder())->run());
+        // $this->call( (new CommentsTableSeeder())->run());
 
     }
 }

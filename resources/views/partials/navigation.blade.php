@@ -4,7 +4,7 @@
 
         <li class="nav-item" class="mx-auto">
             <figure  >
-                <img class=".img-responsive" hspace="18" alt="logo" src="{{URL('/twitter-logo.png')}}">
+                <img class=".img-responsive" hspace="18" alt="logo" src="{{asset('images/LaraTweet-Logo.png')}}">
             </figure>
         </li>
 

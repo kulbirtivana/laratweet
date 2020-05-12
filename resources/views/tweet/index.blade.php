@@ -12,7 +12,7 @@ LaraTweet
 @endif
 
 
-@section('js')
+<!-- @section('js')
     <script>
         var updatePostStats = {
             Like: function (tweetId) {
@@ -44,70 +44,61 @@ LaraTweet
             var action = event.action;
             updatePostStats[action](event.tweetId);
         })
-    </script>
-    @endsection
+    </script> -->
+<div id="app">
+    @foreach($tweets as $tweet)
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">List of Tweets</div>
-                <div class="card-body">
-
-<ul>
-	@foreach($tweets as $tweet)
-
-	<li>
-		<h2>{{$tweet->name }}</h2>
+<div class="card" class="gridCard m-b-md" style="width: 30rem;">
+        <ul>
+            <div class="card-body"> 
+                <li>
+                    <a href="{{ route('profiles.show', $tweet->user_id }}" class=
+                        "text-dark" class="nav-link">
+		                  <h2>{{$tweet->name }}</h2>
+                    </a>
                   
-		    <p>
-                @if($tweet->is_gif == TRUE )
-                <img src="{{ $tweet->message }}">
-                @else
-                {{ $tweet->message }}
-                @endif
+		              <div class="float-right">
+              
+                            @if($follower->followed ? '') 
+                                 <small>Followed</small>
+
+                                @else 
+                                <small>Not Followed</small>
+                       @endif
+		              </div>
+                    <p>
+                        {{ $tweet->message}}
+                    </p>
+                    @auth
+			
+	            <a href="{{route('tweet.show', $tweet->id) }}">
+                    <button data-post-id="{{ $tweet->id }}"> View Comments</button>
+                </a>
+                <p>
+                    <div id="comments-count-{{ $tweet->id }}">{{ $tweet->comments_count }} Comments </div>
+                </p>
+
+                <small>{{ $tweet->posted_at }}</small>
+
+                <Likes class="float-right" v-on:submit.prevent="onSubmit" data-post-id="{{ $tweet->id }}">
+                        @csrf 
+                        @method('PATCH')
+                    </Likes> 
                 
-		    </p>
-			<div class="float-none">
-                    @if($follower ?? '') 
-                    <small>Unfollow</small>
-
-                    @else 
-                    <small>Follow</small>
-
-                    @endif
-		        <ul>
-		    	<li>
-				@auth
-	            <a href="{{route('tweet.edit', $tweet->id) }}">Edit Tweet</a>
-		    	</li>
-	            <li>
-	            <form action="{{ route('tweet.destroy', $tweet->id)}}" method="post">
-		@csrf
-		@method('DELETE')
-	<input type="submit" value="Delete Tweet">
-	</form>
-
-	 <div class="float-right">
-                    <button  onclick="actOnTweet(event);" data-post-id="{{ $tweet->id }}">Like</button>
-                    <span id="likes-count-{{ $tweet->id }}">{{ $tweet->likes_count }}</span>
-                </div>
-	@endauth
-		</ul>
-		<ul>
-	<li>
-<a href="{{route('tweet.show', $tweet->id)}}">Read More</a>
-	</li>
-</ul>
-	@endforeach
-</ul>
-
-@if ( session()->get('success'))
-<div role="alert">
-	{{session()->get('success')}}
+                <p  class="float-right">
+                    <span id="comments-count-{{ $tweet->id }}">{{ $tweet->likes_count }} Likes </span>
+                </p>
+            
+                @endauth
+                </li> 
+            </div>
+        </ul>
 </div>
-@endif
-
-
-	
+@endforeach
+{{ $tweet->links() }}
 @endsection
+
+</div>
+
+
+

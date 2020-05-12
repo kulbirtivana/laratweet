@@ -49,12 +49,14 @@
             .laratext{
                 text-align: center;
                 font-family: Helvetica Neue,Helvetica,Arial,sans-serif, bold; 
-
+                text-decoration: none;
             }
 
             #navigation{
                 text-align: center;
                 background-color: #138BCC;
+                text-decoration: none;
+
             }
 
             .menu{
@@ -62,6 +64,14 @@
                 color: white;
                 text-decoration: none;
                 text-align: center;
+                font-size: 18px;
+            }
+
+            .menu a{
+            color: white;
+            text-decoration: none;
+            padding-right: 15px;
+
             }
             .full-height {
                 height: 100vh;
@@ -72,7 +82,6 @@
                 display: flex;
                 justify-content: center;
                 background-color: #E0ECF4;
-
             }
 
 
@@ -115,6 +124,10 @@
                 text-align: center;
 
             }
+
+            .social{
+                padding-bottom: 10px;
+            }
               .features, .use {
                 font-size: 28px;
                 text-align: center;
@@ -156,7 +169,8 @@
                 color:white;
                 padding: 10px;
                 font-size: 18px;
-                background-color: #138BCC;
+                text-decoration: none;
+
             }
 
             .register1{
@@ -193,43 +207,136 @@
             }
 
 
-            @media screen and (max-width: 600px)
+            @media screen and (max-width: 800px)
             {
                 .uses img{
                 height:50px;
                 width:50px;
             }
-            }
-
-            #pinContainer {
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-/*            -webkit-perspective: 1000;
-*//*            perspective: 1000;
-*/            }
-            #slideContainer {
-                width: 400%; /* to contain 4 panels, each with 100% of window width */
-                height: 100%;
-            }
-            .panel {
-                height: 100%;
-                width: 100%; /* relative to parent -> 25% of 400% = 100% of window width */
-                position: absolute;
-/*                float: left;
-*/            }
+            }    
 
             .footer{
-                text-align: center;
-                padding:10px;
                 font-size: 12px;
             }
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #f8f8f8;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.panel {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    font-size: 60px;
+    text-align: center;
+    color: #fff;
+}
+
+.one {
+    background-color: #67D5B5;
+}
+
+.two {
+    background-color: #EE7785;
+}
+
+.three {
+    background-color: #C89EC4;
+}
+
+.four {
+    background-color: #84B1ED;
+}
+
+.top {
+    height: 500px;
+    font-size: 30px;
+}
+/*html, body {
+    height: 100%;
+}
+
+.sections {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.section1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+    
+.section1.one {
+    background-color: #138BCC;
+}
+
+.section1.one h4{
+    color: white;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+.section1.one img{
+    width: auto
+    height: 400px;
+}
+
+.section1.two {
+    background-color: #138BCC;
+}
+
+.section1.two h4{
+    color: white;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+.section1.two img{
+    width: auto;
+    height: auto;
+}
+
+.section1.three {
+    background-color: #138BCC;
+}
+
+.section1.three h4{
+    color: white;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+.section1.three img{
+    width: auto;
+    height: auto;
+}
+
+
+.section1.four {
+    background-color: green;
+}*/
 
 </style>
     </head>
     <body>
-                {{--@extends('layouts.app')--}}
+                {{--@extends('layouts')--}}
 
             <div>
                        
@@ -255,7 +362,7 @@
                     </nav>
             </div>
 
-        <div class="">
+        <div>
 
            <div class="content">
 
@@ -267,7 +374,7 @@
                         <img class=".img-responsive" class="container-fluid" class="mainbanner" src="{{ asset('images/LaraTweet-Main-Banner.jpg')}}">
                     </figure>
                 </div>               
-                <p>A social networking site where people communicate in short messages called tweets</p>
+                <p class="social" >A social networking site where people communicate in short messages called tweets</p>
                     <div><a class="register" href="{{ route('register') }}">Register Here</a></div><br>
         </div>
                     
@@ -299,39 +406,51 @@
           </section>
 </section>
 
-
-
     <section class="benefits">Benefits
-        <div id="pinContainer">
-<!--             <div id="slideContainer">
- -->                <section class="panel">
+
+          <!--   <div id="container">
+                <section class="panel one">
                     <b>ONE</b>
-                    <img src="images/promote.png" alt="Promotion" title="Promotion of products/services">
                 </section>
-                <section class="panel turqoise">
+                <section class="panel two">
                     <b>TWO</b>
                 </section>
-                <section class="panel green">
+                <section class="panel three">
                     <b>THREE</b>
                 </section>
-                <section class="panel bordeaux">
+                <section class="panel four">
                     <b>FOUR</b>
                 </section>
-<!--             </div>
- -->        </div>
+            </div> -->
+               <div id="container">
+                <section class="panel one">Reach a large number of people quickly through tweets and retweets<br>
+                <img src="images/promote.png" alt="Promotion" title="Promotion of products/services">
+                </section>
+
+                    <section class="panel two">Follow the work of others : Build relationships with other followers<br>
+                     <img src="images/follow-events.png" alt="Follow the Experts" title="Follow the experts">
+                    </section>
+
+                <section class="panel three">
+                Seek feedback about your work and give feedback to others<br>
+                       <img src="images/feedback.png" alt="Feeddback" title="Feeddback of your work"></section>
+
+                <section class="panel four">Follow and contribute to discussions on events<br>
+                     <img src="images/follow-unfollow-a-person.png" alt="Follow unFollow a Person" title="Follow Unfollow a person">
+                </section>
+            </div>
     </section>
 
     <section class="use">Why I should use it?
-
         <p>
             <div class="uses">
-                <li>Brand Awareness<br><img src="images/brand-awareness.jpeg"></li>
-                <li>Generate leads<br><img src="images/brand-awareness.jpeg"></li>
+                <li>Brand Awareness<br><img src="images/brand-awareness.jpeg" alt="brand awareness" title="brand awareness"> </li>
+                <li>Generate leads<br><img src="images/brand-awareness.jpeg" alt="generate leads" title="generate awareness"></li>
                 <br>
                 <br>
                 <p></p>
-                <li>Create a positive opinion<br><img src="images/brand-awareness.jpeg"></li>
-                <li>Build community<br><img src="images/brand-awareness.jpeg"></li>
+                <li>Positive opinion<br><img src="images/brand-awareness.jpeg" alt="Positive Opinion" title="Positive Opinion"></li>
+                <li>Build community<br><img src="images/brand-awareness.jpeg" alt="Build Community" title="Build Community"></li>
             </div>
 
              <div><a class="register1" href="{{ route('register') }}">Register Here</a></div>

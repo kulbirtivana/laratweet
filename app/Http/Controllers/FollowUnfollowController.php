@@ -6,7 +6,7 @@ use App\FollowUnfollow;
 use Illuminate\Http\Request;
 use Auth;
 use App\Tweet;
-use App\profile;
+use App\Profile;
 use App\User;
 use App\Comment;
 
@@ -18,33 +18,29 @@ class FollowUnfollowController extends Controller
     {
       if ( $user = Auth::user())
       {
-        $profile = profile::findOrFail($id);
-
         $follower = New FollowUnfollow;
-        $follower->profile_id = $id;
-        $follower->follower_id = $profile->id;
+        $follower->user_id = $id;
+        $follower->follower_id = $user->id;
         $follower->followed = 1;
         $follower->save();
 
-        $following = FollowUnfollow::where ('followed', '==', 1);
-
-        return redirect('/tweet')->with('success', 'Started following');
+        return redirect('/tweet')->with('success', 'Started following the user');
     }
+    if( ! $user) {
     return redirect('tweet');
-        
+        }
     }
 
-    public function unfollowProfile($id)
+    public function UnfollowUser($id)
     {
         if ($user = Auth::user())
         {
-            $profile = profile::where("user_id", "=", $user->id)->firstOrFail();
 
-            $follower = FollowUnfollow::where('profile_id', '=', $id )
-            ->where('follower_id', $profile->id)
+            $follower = FollowUnfollow::where('user_id', '=', $id )
+            ->where('follower_id', $user->id)
             ->delete();
 
-            return redirect('/tweet')->with('success', 'Unfollow the profile');
+            return redirect('/tweet')->with('success', 'Unfollow the user');
         }
     }
     public function Following($id)

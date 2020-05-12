@@ -39,9 +39,34 @@ class User extends Authenticatable
 
     public function profiles()
     {
-        return $this->hasOne( 'App\profile');
+        return $this->hasOne( 'App\Profile');
     }
 
+
+public function comments()
+    {
+        return $this->hasMany( 'App\Comment' );
+    }
+
+    public function tweets()
+    {
+        return $this->hasMany( 'App\Tweet' );
+    }
+
+    public function followers()
+    {
+        return $this->hasMany( 'App\FollowUnFollow' )->withTimestamps();
+    }
+
+    public function followings()
+    {
+        return $this->hasMany( 'App\FollowUnFollow' )->withTimestamps();
+    }
+
+    public function likedPosts()
+    {
+        return $this->morphedByMany('App\Tweet', 'likeable')->whereDeletedAt(null);
+    }
     
 }
 

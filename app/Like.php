@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     //
-        protected $fillable = ['likes_id', 'likeable_type', 'profile_id']; 
+        protected $fillable = ['likes_id', 'likeable_type', 'user_id']; 
 
-        public function profiles()
+        public function users()
         {
-        	return $this->belongsTo(profile::class);
+        	return $this->belongsTo(User::class);
         }
 
         use SoftDeletes;
@@ -20,7 +20,7 @@ class Like extends Model
 
         public function tweets()
         {
-        	return $this->belongTo('App\Like');
+        	return $this->morphedByMany('App\Tweet', 'likes');
         }
 
         public function comments()

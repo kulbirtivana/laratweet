@@ -28,11 +28,10 @@ Edit Tweet
 		<textarea name="message" id="message" cols="30" rows="10">{{ $tweet->message }}</textarea>
 	</label>
 	<input type="submit" Value="Update Tweet">
-
-	{{--<label for="author">
-		<strong>Author name:</strong>
-		<input type="text" name="author" id="author" value="{{ $tweet->author }}">
-	</label>--}}
-
 	</form>
+
+                <form action="{{ route('tweet.destroy', $tweet->id) }}" method="post">
+                @csrf 
+                @method('DELETE')
+                <input class="btn btn-danger" type="submit" value="Delete Post">
 @endsection

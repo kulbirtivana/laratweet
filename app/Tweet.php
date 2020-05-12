@@ -19,12 +19,13 @@ class tweet extends Model
     	'message',
     	'photo',
     	'likes_count',
+        'comments_count',
     	'posted_at'
     );
 
-    public function profiles()
+    public function users()
     {
-    	return $this->belongsTo('App\profile');
+    	return $this->belongsTo('App\User');
     }
 
     public function comments()
@@ -34,6 +35,16 @@ class tweet extends Model
 
     public function likes()
     {
-    	return $this->hasMany('App\Like');
+    	return $this->morphToMany('App\Like', 'likes')->whereDeletedAt(null);
     }
+      public function getIsLikedAttribute()
+    {
+        $like = $this->likes()->whereUserId(User::id())->first();
+        return (!is_null($like)) ? true : false;
+    }
+
+    public function author()
+        {
+            return $this->belongsTo(User::class, 'user_id', 'id');
+        }
 }

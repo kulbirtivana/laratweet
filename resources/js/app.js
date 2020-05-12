@@ -46,6 +46,7 @@ Vue.component('comment-edit-form', require('./components/CommentEditForm.vue').d
 
 Vue.component('comment-create-form', require('./components/CommentCreateForm.vue').default);
 
+Vue.component('Likes', require('./components/Likes.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

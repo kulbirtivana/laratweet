@@ -1,22 +1,21 @@
 @extends('layout')
 
 @section('title')
-Edit Comment
+Comment
 @endsection
 
 @section('content')
 
-
-<h1> Edit your Comment Here!</h1>
-
 @include('partials.errors')
 
-
 <div class="container-fluid">
-    <div class="row h-100 justify-content-center align-items-center">
+    <div class="column h-100 justify-content-center align-items-center">
 
+<div class="card">
 
-        <section>
+    <section>
+         <div class="card-body">
+
             @if( $comment->is_gif == TRUE )
             <figure>
                 <img src="{{ $comment->content }}">
@@ -27,9 +26,7 @@ Edit Comment
             </p>
             @endif
         </section>
-
-        <a href="#" id="reply"></a>
-
+    </div>
 
         <div class="float-right" id="app">
             <comment-edit-form submission-url="{{ route( 'comments.update', $comment->id) }}" v-model="content">
@@ -60,16 +57,14 @@ Edit Comment
     </div>
     </form>  -->
 
-    <div class="form-group container h-100">
         <form action="{{ route('comments.destroy', $comment->id) }}" method="post">
                         @csrf 
                         @method('DELETE')
                         <input class="btn btn-warning" type="submit" value="Delete Comment">
+     </div>
     </div>
-
 </form>
 
-</div>
 </div>
 
 @endsection

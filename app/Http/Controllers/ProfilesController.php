@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\Tweet;
 use App\User;
-use Auth;
-use App\profile;
+use App\Profile;
 use App\Comment;
 USE App\FollowUnfollow;
 
@@ -21,7 +21,7 @@ class ProfilesController extends Controller
     {
         //
         
-        $profiles = profile::query()
+        $profiles = Profile::query()
         ->join( 'users', 'profiles.user_id', '=', 'users.id' )
         ->get();
 
@@ -58,16 +58,16 @@ class ProfilesController extends Controller
         if ($user = Auth::user())
         {
             $validatedData = $request->validate(array(
-                'name' => 'required|max:25',
+                'username' => 'required|max:25',
                 'about_user' => 'max:255'
             ));
             $user = Auth::user();
 
-            $profile = profile::where("user_id", "=", $user->id)->firstOrFail();
+            $profile = Profile::where("user_id", "=", $user->id)->firstOrFail();
 
 
             $profile->user_id = $user->id;
-            $profile->name = $validatedData['name'];
+            $profile->username = $validatedData['username'];
             $profile->about_user = $validatedData['about_user'];
             $profile->photo = 'photo';
             $profile->save();
@@ -86,17 +86,15 @@ class ProfilesController extends Controller
     public function show($id)
     {
         //
-        $user = Auth::user();
+        $profile = Profile::findOrFail($id);
 
-        $profile = profile::findOrFail($id);
         $tweet = Tweet::findOrFail($id);
         $tweets = Tweet::query()
-        ->join('profiles', 'tweets.profile_id', '=', 'profiles.id')
+        ->join('users', 'tweets.user_id', '=', 'users.id')
         ->select( 'tweets.id',
-            'profiles.id as profile_ID',
-            'profiles.name',
-            'profiles.about_user',
-            'profiles.photo as profile_picture',
+            'users.id as user_id',
+            'users.name',
+            'tweets.photo',
             'tweets.message',
             'tweets.likes_count')
        ->orderBy('tweets.id', 'desc')
@@ -117,7 +115,7 @@ class ProfilesController extends Controller
     {
         //
         if ($user = Auth::user()){
-            $profile = profile::findOrFail($id);
+            $profile = Profile::findOrFail($id);
 
             return view('profiles.edit', compact('profile'));
         }
@@ -136,10 +134,10 @@ class ProfilesController extends Controller
         //
         if($user = Auth::user()){
             $validatedData = $request->validate(array(
-                'name' => 'required|max:25',
+                'username' => 'required|max:25',
                 'about_user' => 'max:255',
             ));
-            profile::whereId($id)->update($validatedData);
+            Profile::whereId($id)->update($validatedData);
             return redirect('/tweet')->with('success', 'Profile updated');
         }return redirect('/tweet');
     }
@@ -154,48 +152,13 @@ class ProfilesController extends Controller
     {
         //
         if( $user = Auth::user()){
-        $profile = profile::findOrFail($id);
+        $profile = Profile::findOrFail($id);
     
             $profile->delete();
     
             return redirect('/tweet')->with('success', 'Profile deleted.');
         }
         return redirect('/tweet');
-    } 
-
-    public function showPost($id)
-    {
-        $tweets = tweet::query( )
-        ->join( 'tweets', 'tweets.profile_id', '=', 'profiles.id' ) 
-        ->get(); 
-
-    }
-
-    public function getUserByUsername($username)
-    {
-        return User::with('profile')->wherename($username)->firstOrFail();
-    }
-
-
-        public function followProfile($id)
-    {
-        $follow = New FollowUnfollow;
-        $follow->profile_id = profile()->id;
-        $follow->follower_id = $id;
-        $follow->followed = 1;
-        $follow->save();
-
-        return redirect()->back();
-
-    }
-
-    public function UnfollowProfile($id)
-    {
-        $follow = FollowUnfollow::where('profile_id', profile()->id)
-                    ->where('follower_id', $id)
-                    ->delete();
-
-                    return redirect()->back();
     }
 
     
