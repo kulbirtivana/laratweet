@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory;
 use App\Profile;
+use App\User;
 
 class TweetsTableSeeder extends Seeder
 {

@@ -52,14 +52,13 @@ LaraTweet
         <ul>
             <div class="card-body"> 
                 <li>
-                    <a href="{{ route('profiles.show', $tweet->user_id }}" class=
-                        "text-dark" class="nav-link">
+                    <a href="{{ route('profiles.show', $tweet->user_id) }}" class="text-dark" class="nav-link">
 		                  <h2>{{$tweet->name }}</h2>
                     </a>
                   
 		              <div class="float-right">
               
-                            @if($follower->followed ? '') 
+                            @if($follower->followed ?? '') 
                                  <small>Followed</small>
 
                                 @else 
@@ -95,7 +94,7 @@ LaraTweet
         </ul>
 </div>
 @endforeach
-{{ $tweet->links() }}
+{{ $tweets->links() }}
 @endsection
 
 </div>

@@ -93,13 +93,13 @@ class TasksController extends Controller
         $tweet = new tweet;
         $tweet->usere_id = $user->id;
         $tweet->message = $validatedData['message'];
-        }
         $tweet->save();  
- 
         return redirect('/tweet')->with('success', 'Tweet saved');
-        }
-    return redirect('/tweet');
     }
+    return redirect('/tweet');
+}
+
+
 
     /**
      * Display the specified resource.
@@ -117,7 +117,7 @@ class TasksController extends Controller
         $user = User::findOrFail($tweet->user_id);
 
         $profile = Profile::where("user_id", "=", "$user->id")->firstOrFail();
-        return view('tweet.show', compact('tweet', 'comment', 'profile', 'user');
+        return view('tweet.show', compact('tweet', 'comment', 'profile', 'user'));
     }
 
          //* Show the form for editing the specified resource.
@@ -202,7 +202,6 @@ class TasksController extends Controller
         $tweet->save();
         return response()->json([
             'message' => 'Thanks',
-        ])
-    }
+        ]);
     }
 }
