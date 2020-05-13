@@ -30,7 +30,7 @@ class CommentController extends Controller
     public function create()
     {
         //
-        $user = Auth::create();
+        $user = Auth::user();
         if($user)
             return view('comments.create');
         else

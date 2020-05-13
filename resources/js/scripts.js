@@ -45,7 +45,7 @@ if (clickedElementP.is( ':hidden')){
 		// $(function () { 
 		var controller = new ScrollMagic.Controller();
 	 	var wipeAnimation = new TimelineMax()
-	 	.fromTo(".one", 1, {x:"-100%"}, {x:"0%"})
+	 	// .fromTo(".one", 1, {x:"100%"}, {x:"0%"})
 		.fromTo(".two", 1, {x:"-100%"}, {x:"0%"} )
 		.fromTo(".three", 1, {y:"-100%"}, {y:"0%"} )
 		.fromTo(".four", 1, {x:"100%"}, {x:"0%"} )

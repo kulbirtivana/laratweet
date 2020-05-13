@@ -1,40 +1,42 @@
+  
 <template>
-<div>
-    <form action="tweet/Like" method="post">
-        <label for="Likes">
-            <button type="submit" value="Like" onclick="toggleLike( event )">Like</button>
-        </label>
-    </form>             
-</div>
+  <div>
+    <a href="#" v-if="isLiked" @click.prevent="unLike(tweet)">
+      <i class="fas fa-thumbs-o-up" aria-hidden="true" style="color: blue; font-size: 2em;"></i>
+      </a>
+    <a href="#" v-else @click.prevent="like(tweet)">
+      <i class="fas fa-thumbs-down" aria-hidden="false" style="color: red; font-size: 2em;"></i>
+    </a>
+  </div>
 </template>
 
 <script>
     export default {
         name: "Likes",
-        methods: {
-             toggleLike: function( event )
-        {
-            let tweetId = event.target.dataset.tweetId;
-            let action = event.target.textContent;
-            toggleButtonText[action](event.target);
-            updatePostStats[action](postId);
-            axios.patch('/tweet/' + tweettId + '/act',
-            { action: like });
-        },
-            like(tweetId) {
-                 this.text = 'Unlike';
-                 document.querySelector('#likes-count-' + postId).textContent++;
-                axios.patch('/tweet/tweetId/like')
-                   
+        props: ["tweet", "liked"],
+        data() {
+            return {
+                    isLiked: ""
+                    };
+                },
+
+            mounted () {
+                this.isLiked = this.isLike ? true : false;
             },
-            unLike(tweetId) {
-                 this.text = 'Like';
-                  document.querySelector('#likes-count-' + tweetId).textContent--;
-                axios.patch('/tweet/tweetId/unLike')
-            
-            }
+
+            computed: {
+                isLike() {
+                return this.liked;
+                }
+            },
+        methods: {
+             like(tweet) {
+             axios
+             .tweet("tweetLara/public/like" + tweet)
+             .then(response => (this.isLiked = false))
+             }
         }
-    }
+    };
 </script>
 
 <style scoped>

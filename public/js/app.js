@@ -1948,7 +1948,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "comment-create-form",
   props: ["submissionUrl", "tweetId", "commentId"],
   computed: {
-    content: {
+    message: {
       get: function get() {
         this.isStringAGIFUrl(this.$attrs.value);
         return this.$attrs.value;
@@ -1968,7 +1968,7 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     resetMessage: function resetMessage() {
-      this.content = "";
+      this.message = "";
     }
   },
   data: function data() {
@@ -2029,7 +2029,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "comment-edit-form",
   props: ["submissionUrl", "tweetId", "commentId"],
   computed: {
-    content: {
+    message: {
       get: function get() {
         this.isStringAGIFUrl(this.$attrs.value);
         return this.$attrs.value;
@@ -2049,7 +2049,7 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     resetMessage: function resetMessage() {
-      this.content = "";
+      this.message = "";
     }
   },
   data: function data() {
@@ -2156,27 +2156,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Likes",
+  props: ["tweet", "liked"],
+  data: function data() {
+    return {
+      isLiked: ""
+    };
+  },
+  mounted: function mounted() {
+    this.isLiked = this.isLike ? true : false;
+  },
+  computed: {
+    isLike: function isLike() {
+      return this.liked;
+    }
+  },
   methods: {
-    toggleLike: function toggleLike(event) {
-      var tweetId = event.target.dataset.tweetId;
-      var action = event.target.textContent;
-      toggleButtonText[action](event.target);
-      updatePostStats[action](postId);
-      axios.patch('/tweet/' + tweettId + '/act', {
-        action: like
+    like: function like(tweet) {
+      var _this = this;
+
+      axios.tweet("tweetLara/public/like" + tweet).then(function (response) {
+        return _this.isLiked = false;
       });
-    },
-    like: function like(tweetId) {
-      this.text = 'Unlike';
-      document.querySelector('#likes-count-' + postId).textContent++;
-      axios.patch('/tweet/tweetId/like');
-    },
-    unLike: function unLike(tweetId) {
-      this.text = 'Like';
-      document.querySelector('#likes-count-' + tweetId).textContent--;
-      axios.patch('/tweet/tweetId/unLike');
     }
   }
 });
@@ -37836,7 +37840,7 @@ var render = function() {
       _vm.isGif
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-12" }, [
-              _c("img", { attrs: { src: _vm.content } }),
+              _c("img", { attrs: { src: _vm.message } }),
               _vm._v(" "),
               _c(
                 "button",
@@ -37863,18 +37867,18 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.content,
-                    expression: "content"
+                    value: _vm.message,
+                    expression: "message"
                   }
                 ],
-                attrs: { type: "hidden", name: "content" },
-                domProps: { value: _vm.content },
+                attrs: { type: "hidden", name: "message" },
+                domProps: { value: _vm.message },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.content = $event.target.value
+                    _vm.message = $event.target.value
                   }
                 }
               }),
@@ -37895,19 +37899,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.content,
-                      expression: "content"
+                      value: _vm.message,
+                      expression: "message"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", name: "content" },
-                  domProps: { value: _vm.content },
+                  attrs: { type: "text", name: "message" },
+                  domProps: { value: _vm.message },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.content = $event.target.value
+                      _vm.message = $event.target.value
                     }
                   }
                 }),
@@ -37975,7 +37979,7 @@ var render = function() {
       _vm.isGif
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-12" }, [
-              _c("img", { attrs: { src: _vm.content } }),
+              _c("img", { attrs: { src: _vm.message } }),
               _vm._v(" "),
               _c(
                 "button",
@@ -38002,18 +38006,18 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.content,
-                    expression: "content"
+                    value: _vm.message,
+                    expression: "message"
                   }
                 ],
-                attrs: { type: "hidden", name: "content" },
-                domProps: { value: _vm.content },
+                attrs: { type: "hidden", name: "message" },
+                domProps: { value: _vm.message },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.content = $event.target.value
+                    _vm.message = $event.target.value
                   }
                 }
               }),
@@ -38027,26 +38031,26 @@ var render = function() {
         : _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "form-group" }, [
-                _c("strong", [_vm._v("Content")]),
+                _c("strong", [_vm._v("message")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.content,
-                      expression: "content"
+                      value: _vm.message,
+                      expression: "message"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", name: "content" },
-                  domProps: { value: _vm.content },
+                  attrs: { type: "text", name: "message" },
+                  domProps: { value: _vm.message },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.content = $event.target.value
+                      _vm.message = $event.target.value
                     }
                   }
                 }),
@@ -38220,32 +38224,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("form", { attrs: { action: "tweet/Like", method: "post" } }, [
-        _c("label", { attrs: { for: "Likes" } }, [
-          _c(
-            "button",
-            {
-              attrs: {
-                type: "submit",
-                value: "Like",
-                onclick: "toggleLike( event )"
+  return _c("div", [
+    _vm.isLiked
+      ? _c(
+          "a",
+          {
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.unLike(_vm.tweet)
               }
-            },
-            [_vm._v("Like")]
-          )
-        ])
-      ])
-    ])
-  }
-]
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-thumbs-o-up",
+              staticStyle: { color: "blue", "font-size": "2em" },
+              attrs: { "aria-hidden": "true" }
+            })
+          ]
+        )
+      : _c(
+          "a",
+          {
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.like(_vm.tweet)
+              }
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-thumbs-down",
+              staticStyle: { color: "red", "font-size": "2em" },
+              attrs: { "aria-hidden": "false" }
+            })
+          ]
+        )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -50421,6 +50442,8 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 // import { TweenMax } from 'gsap';
 // import ScrollMagic from 'scrollmagic';
 // import 'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators';
@@ -50436,7 +50459,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // require('laravel-mix-scrollmagic-gsap');
 // mix.scrollmagicGSAP();
 
-__webpack_require__(/*! ./scripts.js */ "./resources/js/scripts.js"); // import ScrollMagic from 'scrollmagic/scrollmagic/minified/ScrollMagic.min';
+console.log(typeof ScrollMagic === "undefined" ? "undefined" : _typeof(ScrollMagic));
+if (typeof ScrollMagic !== "undefined") __webpack_require__(/*! ./scripts.js */ "./resources/js/scripts.js"); // import ScrollMagic from 'scrollmagic/scrollmagic/minified/ScrollMagic.min';
 // import 'scrollmagic/scrollmagic/minified/plugins/animation.gsap.min';
 // // For development only
 // import 'scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min'
@@ -50455,7 +50479,6 @@ __webpack_require__(/*! ./scripts.js */ "./resources/js/scripts.js"); // import 
  */
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 
 Vue.component('Giphy', __webpack_require__(/*! ./components/Giphy.vue */ "./resources/js/components/Giphy.vue")["default"]);
 Vue.component('comment-edit-form', __webpack_require__(/*! ./components/CommentEditForm.vue */ "./resources/js/components/CommentEditForm.vue")["default"]);
@@ -50478,37 +50501,7 @@ var app = new Vue({
       this.content = imgSrc;
     }
   }
-}); // //ScrollMagic
-// 		// $(function () { // wait for document ready
-// 		// init
-// 		var controller = new ScrollMagic.Controller();
-// 		// define movement of panels
-// 		var wipeAnimation = new TimelineMax()
-// 		.fromTo("section.panel.turqoise", 1, {x: "-100%"}, {x: "0%", ease: Linear.easeNone})  // in from left
-// 			.fromTo("section.panel.green",    1, {x:  "100%"}, {x: "0%", ease: Linear.easeNone})  // in from right
-// 			.fromTo("section.panel.bordeaux", 1, {y: "-100%"}, {y: "0%", ease: Linear.easeNone}); // in f
-// 			// animate to second panel
-// 			// .to("#slideContainer", 0.5, {z: -150})		// move back in 3D space
-// 			// .to("#slideContainer", 1,   {x: "-25%"})	// move in to first panel
-// 			// .to("#slideContainer", 0.5, {z: 0})				// move back to origin in 3D space
-// 			// // animate to third panel
-// 			// .to("#slideContainer", 0.5, {z: -150, delay: 1})
-// 			// .to("#slideContainer", 1,   {x: "-50%"})
-// 			// .to("#slideContainer", 0.5, {z: 0})
-// 			// // animate to forth panel
-// 			// .to("#slideContainer", 0.5, {z: -150, delay: 1})
-// 			// .to("#slideContainer", 1,   {x: "-75%"})
-// 			// .to("#slideContainer", 0.5, {z: 0});
-// 		// create scene to pin and link animation
-// 		new ScrollMagic.Scene({
-// 				triggerElement: "#pinContainer",
-// 				triggerHook: "onLeave",
-// 				duration: "500%"
-// 			})
-// 			.setPin("#pinContainer")
-// 			.setTween(wipeAnimation)
-// 			.addIndicators() // add indicators (requires plugin)
-// 			.addTo(controller);
+});
 
 /***/ }),
 
@@ -50879,11 +50872,8 @@ $('body').on('click', '.featuresall', function (event) {
 // $(function () { 
 
 var controller = new ScrollMagic.Controller();
-var wipeAnimation = new TimelineMax().fromTo(".one", 1, {
-  x: "-100%"
-}, {
-  x: "0%"
-}).fromTo(".two", 1, {
+var wipeAnimation = new TimelineMax() // .fromTo(".one", 1, {x:"100%"}, {x:"0%"})
+.fromTo(".two", 1, {
   x: "-100%"
 }, {
   x: "0%"

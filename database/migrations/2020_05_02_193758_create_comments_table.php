@@ -15,7 +15,7 @@ class CreateCommentsTable extends Migration
     {
          Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->longText('content');
+            $table->longText('message');
             $table->boolean( 'is_gif' )->default( false );
             $table->unsignedBigInteger( 'user_id' )->nullable();
             $table->unsignedBigInteger( 'tweet_id' )->nullable();

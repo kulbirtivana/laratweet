@@ -186,22 +186,16 @@ class TasksController extends Controller
         return redirect('/tweet');
     }
 
-    public function getlike(Request $request)
+    public function likeTweet(Tweet $tweet)
     {
-        $tweet = Tweet::find($request->tweet);
-        return response()->json([
-            'tweet' => $tweet,
-        ]);
+        Auth::user()->likes()->attach($tweet->id);
+
+        return back();
     }
 
-    public function like(Request $request)
+    public function unlikeTweet(Tweet $tweet)
     {
-        $tweet = Tweet::find($request->tweet);
-        $value = $tweet->like;
-        $tweet->like = $value + 1;
-        $tweet->save();
-        return response()->json([
-            'message' => 'Thanks',
-        ]);
+        Auth::user()->likes()->detach($tweet->id);
+        return back();
     }
 }

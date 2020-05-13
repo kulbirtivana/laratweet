@@ -15,7 +15,7 @@ View Comments
     
     <h5> {{ $profile->username }} </h5>
 
-    <p>{{ $tweet->content }}</p>
+    <p>{{ $tweet->message }}</p>
 
 
 @endsection

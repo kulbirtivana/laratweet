@@ -242,29 +242,22 @@ html, body {
     left: 0px;
     width: 100%;
     height: 100%;
-    font-size: 60px;
+    font-size: 20px;
     text-align: center;
-    color: #fff;
+    color: black;
 }
 
-.one {
-    background-color: #67D5B5;
+.one, .two, .three, .four {
+    background-color: #E0ECF4;
 }
 
-.two {
-    background-color: #EE7785;
+.two, .four {
+    background-color: #138BCC;
+    color:white;
+    padding: 10px;
 }
-
-.three {
-    background-color: #C89EC4;
-}
-
-.four {
-    background-color: #84B1ED;
-}
-
 .top {
-    height: 500px;
+    height: 400px;
     font-size: 30px;
 }
 /*html, body {
@@ -406,37 +399,24 @@ html, body {
           </section>
 </section>
 
-    <section class="benefits">Benefits
+    <section class="benefits">Benefits of LaraTweet
 
-          <!--   <div id="container">
-                <section class="panel one">
-                    <b>ONE</b>
-                </section>
-                <section class="panel two">
-                    <b>TWO</b>
-                </section>
-                <section class="panel three">
-                    <b>THREE</b>
-                </section>
-                <section class="panel four">
-                    <b>FOUR</b>
-                </section>
-            </div> -->
+            </div>
                <div id="container">
                 <section class="panel one">Reach a large number of people quickly through tweets and retweets<br>
                 <img src="images/promote.png" alt="Promotion" title="Promotion of products/services">
                 </section>
 
                     <section class="panel two">Follow the work of others : Build relationships with other followers<br>
-                     <img src="images/follow-events.png" alt="Follow the Experts" title="Follow the experts">
+                     <img src="images/rsz_follow-events.png" alt="Follow the Experts" title="Follow the experts">
                     </section>
 
                 <section class="panel three">
                 Seek feedback about your work and give feedback to others<br>
-                       <img src="images/feedback.png" alt="Feeddback" title="Feeddback of your work"></section>
+                       <img src="images/rsz_feedback.png" alt="Feeddback" title="Feeddback of your work"></section>
 
                 <section class="panel four">Follow and contribute to discussions on events<br>
-                     <img src="images/follow-unfollow-a-person.png" alt="Follow unFollow a Person" title="Follow Unfollow a person">
+                     <img src="images/rsz_1follow-unfollow-a-person.jpg" alt="Follow unFollow a Person" title="Follow Unfollow a person">
                 </section>
             </div>
     </section>

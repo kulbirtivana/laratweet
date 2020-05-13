@@ -15,10 +15,10 @@ Show Tweet
 
                     <h2>{{$profile->username ?? ''}}</h2>
                     <p>
-                       <strong> Post: </strong>
+                       <strong> Tweet: </strong>
                     <br>
                     <div class="card-body"> 
-                    <p>{{ $tweet->content }}</p>
+                    <p>{{ $tweet->message }}</p>
                     </p>
                         <h4>Display Comments</h4>
                         @include('tweet.commentsDisplay', ['comments' => $tweet->comments, 'tweet_id' => $tweet->id])
@@ -26,19 +26,19 @@ Show Tweet
                          <section>
                             @if( $comment->is_gif == TRUE )
                             <figure>
-                                <img src="{{ $comment->content }}">
+                                <img src="{{ $comment->message }}">
                             </figure>
                             @else
                             <p>
-                                {{ $comment->content }}
+                                {{ $comment->message }}
                             </p>
                             @endif
                             </section>
                     
-     <a href="{{route('comments.show', $tweet->id)}}" id="reply"></a>
-                    
+<!--      <a href="{{route('comments.show', $tweet->id)}}" id="reply"></a>
+ -->                    
                     <div id="app">
-                        <comment-create-form submission-url="{{route('comments.store')}}" tweet-id="{{ $tweet->id }}" v-model="content">
+                        <comment-create-form submission-url="{{route('comments.store')}}" tweet-id="{{ $tweet->id }}" v-model="message">
                             @csrf
                         </comment-create-form>
                         <Giphy v-on:image-clicked="imageClicked"/>

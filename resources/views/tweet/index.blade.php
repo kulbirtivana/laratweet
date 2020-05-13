@@ -4,7 +4,13 @@
 LaraTweet
 @endsection
 
+
+@auth 
+@include('partials.navigation')
+@endauth
+
 @section('content')
+
 @if ( session()->get('success'))
 <div role="alert">
 	{{session()->get('success')}}

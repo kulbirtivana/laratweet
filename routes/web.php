@@ -12,25 +12,25 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
 
-Route::post('/tweet/{id}/act', 'LikeController@actOnTweet');
-Route::get('tweet/like/{id}', ['as' => 'tweet.like', 'uses' => 'LikeController@likeTweet']);
+// Route::post('/tweet/{id}/act', 'LikeController@actOnTweet');
+// Route::get('tweet/like/{id}', ['as' => 'tweet.like', 'uses' => 'LikeController@likeTweet']);
 
 
-Route::get('/tweets/{id}/act', ['as' => 'comment.like', 'uses' => 'LikeController@likeComment']);
+// Route::get('/tweets/{id}/act', ['as' => 'comment.like', 'uses' => 'LikeController@likeComment']);
 
-Route::post('/like', 'TasksController@getlike');
+Route::post('/like/{tweet}', 'TasksController@likeTweet');
 
 
-Route::post('/like/{id}', 'TasksController@like');
+Route::post('/unlike/{tweet}', 'TasksController@unlikeTweet');
 
 
 Route::get('profile/{id}', 'ProfilesController@showPost');
@@ -45,6 +45,6 @@ Route::resource('comments', 'CommentController');
 
 Route::post('/comment/store', 'CommentController@store')->name('comment.add');
 
-// Route::post('/reply/store', 'CommentController@replyStore')->name('reply.add');
+Route::post('/reply/store', 'CommentController@replyStore')->name('reply.add');
 
 

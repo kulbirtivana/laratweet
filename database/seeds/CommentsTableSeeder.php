@@ -19,7 +19,7 @@ class CommentsTableSeeder extends Seeder
 
         foreach( range(1,10) as $index ){
         	DB::table('comments')->insert(array(
-        		'content' => $faker->paragraph,
+        		'message' => $faker->paragraph,
         		'user_id' => $faker->randomElement(Profile::pluck('id')->toArray()),
                 'tweet_id' => $faker->randomElement(Tweet::pluck('id')->toArray()),
         	));
