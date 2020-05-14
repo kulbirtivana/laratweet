@@ -18,33 +18,4 @@ class profile extends Model
 
     protected $fillable = [
         'username', 'user_id', 'about_user', 'photo'];
-
-//     public function comments()
-//     {
-//         return $this->hasMany( 'App\Comment' );
-//     }
-
-//     public function tweets()
-//     {
-//         return $this->hasMany( 'App\tweet' );
-//     }
-
-//     public function followers()
-//     {
-//         return $this->hasMany( 'App\FollowUnfollow' )->withTimestamps();
-//     }
-
-//     public function followings()
-//     {
-//         return $this->hasMany( 'App\FollowUnfollow' )->withTimestamps();
-//     }
-
-//     public function likedPosts()
-// {
-//     return $this->morphedByMany('App\tweet', 'likes')->whereDeletedAt(null);
-// }
-
-//     protected $fillable = [
-//         'username', 'user_id', 'about_user', 'photo'
-//     ];
 }

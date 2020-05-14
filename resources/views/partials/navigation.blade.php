@@ -1,4 +1,5 @@
-<nav class="navbar navbar-light bg-light" role="navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
     
     <ul class="navbar-nav">
 

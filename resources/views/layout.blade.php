@@ -18,9 +18,9 @@
             @yield('title')
         </h1>
 
-       {{--  @yield('js') --}}
+            @yield('js')
 
-        @yield('content')
+            @yield('content')
       
     </body>
 

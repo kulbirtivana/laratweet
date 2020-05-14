@@ -4,11 +4,11 @@
 
     <div v-if="isGif" class="row">
       <div class="col-md-12">
-        <img :src="message" />
-        <button type="button" class="btn" @click="resetMessage">Reset</button>
+        <img :src="content" />
+        <button type="button" class="btn" @click="resetContent">Reset</button>
         <input type="hidden" name="tweet_id" :value="tweetId" />
         <input type="hidden" name="parent_id" :value="commentId" />
-        <input type="hidden" name="message" v-model="message" />
+        <input type="hidden" name="content" v-model="content" />
         <input type="hidden" name="is_gif" :value="isGif" />
       </div>
     </div> 
@@ -17,7 +17,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <strong>New Comment</strong>
-                <input type="text" name="message"  class="form-control" v-model="message" />
+                <input type="text" name="content"  class="form-control" v-model="content" />
               <input type="hidden" name="tweet_id" :value="tweetId"  />
         <input type="hidden" name="parent_id" :value="commentId" />
     
@@ -39,7 +39,7 @@ export default {
   name: "comment-create-form",
   props: ["submissionUrl", "tweetId", "commentId"],
   computed: {
-    message: {
+    content: {
       get() {
         this.isStringAGIFUrl(this.$attrs.value);
         return this.$attrs.value;
@@ -58,8 +58,8 @@ export default {
       this.isGif = false;
       return false;
     },
-    resetMessage() {
-      this.message = "";
+    resetContent() {
+      this.content = "";
     }
   },
   data() {

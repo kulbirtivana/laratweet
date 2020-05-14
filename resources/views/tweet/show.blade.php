@@ -26,19 +26,19 @@ Show Tweet
                          <section>
                             @if( $comment->is_gif == TRUE )
                             <figure>
-                                <img src="{{ $comment->message }}">
+                                <img src="{{ $comment->content }}">
                             </figure>
                             @else
                             <p>
-                                {{ $comment->message }}
+                                {{ $comment->content }}
                             </p>
                             @endif
                             </section>
                     
-<!--      <a href="{{route('comments.show', $tweet->id)}}" id="reply"></a>
- -->                    
+   <a href="{{route('comments.show', $tweet->id)}}" id="reply"></a>
+                 
                     <div id="app">
-                        <comment-create-form submission-url="{{route('comments.store')}}" tweet-id="{{ $tweet->id }}" v-model="message">
+                        <comment-create-form submission-url="{{route('comments.store')}}" tweet-id="{{ $tweet->id }}" v-model="content">
                             @csrf
                         </comment-create-form>
                         <Giphy v-on:image-clicked="imageClicked"/>

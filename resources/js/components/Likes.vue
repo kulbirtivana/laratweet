@@ -16,12 +16,14 @@
         props: ["tweet", "liked"],
         data() {
             return {
-                    isLiked: ""
+                    isLiked: "",
+                    likeCount: ""
                     };
                 },
 
             mounted () {
                 this.isLiked = this.isLike ? true : false;
+                this.getLikeCount(this.tweet);
             },
 
             computed: {
@@ -33,9 +35,21 @@
              like(tweet) {
              axios
              .tweet("tweetLara/public/like" + tweet)
-             .then(response => (this.isLiked = false))
-             }
+             .then(response => {this.isLiked = true; this.getLikeCount(tweet)})
+             .catch(response => console.log(response.data));
+             },
+             unLike(tweet) {
+             axios
+             .tweet("/tweetLara/public/unlike/" + tweet)
+        .then(response => {this.isLiked = false; this.getLikeCount(tweet)})
+        .catch(response => console.log(response.data));
+        },
+          getLikeCount(tweet) {
+      axios
+        .get("/tweetLara/public/like/" + post)
+        .then(response => (this.likeCount = response.data));
         }
+      }
     };
 </script>
 

@@ -95,7 +95,7 @@ class ProfilesController extends Controller
             'users.id as user_id',
             'users.name',
             'tweets.photo',
-            'tweets.message',
+            'tweets.content',
             'tweets.likes_count')
        ->orderBy('tweets.id', 'desc')
         ->get();

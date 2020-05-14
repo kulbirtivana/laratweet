@@ -91,7 +91,7 @@ class TasksController extends Controller
         ));
         $profile = Profile::where("user_id", "=", $user->id)->firstOrFail();
         $tweet = new tweet;
-        $tweet->usere_id = $user->id;
+        $tweet->user_id = $user->id;
         $tweet->message = $validatedData['message'];
         $tweet->save();  
         return redirect('/tweet')->with('success', 'Tweet saved');

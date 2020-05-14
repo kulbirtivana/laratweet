@@ -49,7 +49,7 @@ class CommentController extends Controller
         if( $user = Auth::user())
         {
             $validatedData = $request->validate(array(
-                'message' => 'required|max:255',
+                'content' => 'required|max:255',
 
         ));
             $input = $request->all();
@@ -64,7 +64,7 @@ class CommentController extends Controller
 
             Comment::create($input);
 
-            return redirect('/tweet')->with('success', 'Comment Saved');
+            return redirect('/tweet')->with('success', 'Comment is saved');
         }
         return redirect('/tweet');
     }
@@ -79,6 +79,7 @@ class CommentController extends Controller
     {
         //
         $comment = Comment::findOrFail($id);
+
         $tweet = Tweet::findOrFail($id);
 
         $user = User::findOrFail( $tweet->user_id);

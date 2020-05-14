@@ -5,10 +5,6 @@ LaraTweet
 @endsection
 
 
-@auth 
-@include('partials.navigation')
-@endauth
-
 @section('content')
 
 @if ( session()->get('success'))
@@ -18,43 +14,16 @@ LaraTweet
 @endif
 
 
-<!-- @section('js')
-    <script>
-        var updatePostStats = {
-            Like: function (tweetId) {
-                document.querySelector('#likes-count-' + tweetId).textContent++;
-            },
-            Unlike: function(tweetId) {
-                document.querySelector('#likes-count-' + tweetId).textContent--;
-            }
-        };
-        var toggleButtonText = {
-            Like: function(button) {
-                button.textContent = "Unlike";
-            },
-            Unlike: function(button) {
-                button.textContent = "Like";
-            }
-        };
-        var actOnTweet = function (event) {
-            var tweetId = event.target.dataset.tweetId;
-            var action = event.target.textContent;
-            toggleButtonText[action](event.target);
-            updatePostStats[action](tweetId);
-            axios.post('/tweet' + tweetId + '/act',
-                { action: action });
-        };
-        Echo.channel('post-events')
-        .listen('TweetAction', function (event) {
-            console.log(event);
-            var action = event.action;
-            updatePostStats[action](event.tweetId);
-        })
-    </script> -->
-<div id="app">
-    @foreach($tweets as $tweet)
+ <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">List of Tweets</div>
+                <div class="card-body">
 
-<div class="card" class="gridCard m-b-md" style="width: 30rem;">
+                    <ul>@foreach($tweets as $tweet)
+
+<div class="card" class="gridCard m-b-md" style="width: 40rem;">
         <ul>
             <div class="card-body"> 
                 <li>
@@ -62,7 +31,7 @@ LaraTweet
 		                  <h2>{{$tweet->name }}</h2>
                     </a>
                   
-		              <div class="float-right">
+		              {{--<div class="float-right">
               
                             @if($follower->followed ?? '') 
                                  <small>Followed</small>
@@ -70,9 +39,9 @@ LaraTweet
                                 @else 
                                 <small>Not Followed</small>
                        @endif
-		              </div>
+		              </div>--}}
                     <p>
-                        {{ $tweet->message}}
+                        {{ $tweet->message }}
                     </p>
                     @auth
 			
@@ -80,19 +49,19 @@ LaraTweet
                     <button data-post-id="{{ $tweet->id }}"> View Comments</button>
                 </a>
                 <p>
-                    <div id="comments-count-{{ $tweet->id }}">{{ $tweet->comments_count }} Comments </div>
+                   <div>{{ $tweet->comments_count }} Comments </div>
                 </p>
 
                 <small>{{ $tweet->posted_at }}</small>
 
-                <Likes class="float-right" v-on:submit.prevent="onSubmit" data-post-id="{{ $tweet->id }}">
-                        @csrf 
-                        @method('PATCH')
-                    </Likes> 
-                
-                <p  class="float-right">
-                    <span id="comments-count-{{ $tweet->id }}">{{ $tweet->likes_count }} Likes </span>
-                </p>
+             {{--<div class="pull-right">
+                    @if (Auth::check())
+                    <like :tweet={{ $tweet->id }} :liked={{ $tweet->liked() ? 'true' : 'false' }}>
+                    </like>
+                    @endif
+                    <span>{{ $tweet->likes()->count() }}</span>
+                </div>--}} 
+
             
                 @endauth
                 </li> 
@@ -100,7 +69,12 @@ LaraTweet
         </ul>
 </div>
 @endforeach
-{{ $tweets->links() }}
+<div class="row">
+    <div class="col-12 text-enter">
+    {{ $tweets->links() }}
+    </div>
+</div>
+
 @endsection
 
 </div>

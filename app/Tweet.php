@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class tweet extends Model
@@ -33,18 +35,16 @@ class tweet extends Model
     	return $this->hasMany(Comment::class)->whereNull('parent_id');
     }
 
-    public function likes()
+    public function liked()
     {
-    	return $this->morphToMany('App\Like', 'likes')->whereDeletedAt(null);
-    }
-      public function getIsLikedAttribute()
-    {
-        $like = $this->likes()->whereUserId(User::id())->first();
-        return (!is_null($like)) ? true : false;
+      return (bool) Like::where('user_id', Auth::id())
+        ->where('tweet_id', $this->id)
+        ->first();
     }
 
-    public function author()
-        {
-            return $this->belongsTo(User::class, 'user_id', 'id');
-        }
+    public function likes()
+    {
+      return $this->hasMany(Like::class, 'tweet_id');
+    }
+   
 }

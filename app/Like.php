@@ -14,7 +14,6 @@ class Like extends Model
         	return $this->belongsTo(User::class);
         }
 
-        use SoftDeletes;
 
         protected $table = 'likes';
 

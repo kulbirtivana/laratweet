@@ -1,16 +1,16 @@
 @foreach($comments as $comment)
-     @if($comment->parent_id != null) style="margin-left:35px;" @endif>
+     <div class="display-comment" @if($comment->parent_id != null) style="margin-left:35px;" @endif>
      
         <strong>{{ $tweet->name }}</strong>
 
     <section>
         @if( $comment->is_gif == TRUE )
         <figure>
-            <img src="{{ $comment->message }}">
+            <img src="{{ $comment->content }}">
         </figure>
         @else
         <p class="card-body">
-            {{ $comment->message }}
+            {{ $comment->content }}
         </p>
         @endif
     </section>
@@ -28,7 +28,7 @@
         <form action="{{ route('comments.destroy', $comment->id) }}" method="post">
             @csrf
             @method('DELETE')
-            <input class="btn btn-danger  btn-sm" type="submit" value="Delete Comment">
+            <input class="btn btn-secondary  btn-sm" type="submit" value="Delete Comment">
         </form>
     </div>  
 </div>

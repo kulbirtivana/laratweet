@@ -1948,7 +1948,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "comment-create-form",
   props: ["submissionUrl", "tweetId", "commentId"],
   computed: {
-    message: {
+    content: {
       get: function get() {
         this.isStringAGIFUrl(this.$attrs.value);
         return this.$attrs.value;
@@ -1967,8 +1967,8 @@ __webpack_require__.r(__webpack_exports__);
 
       return false;
     },
-    resetMessage: function resetMessage() {
-      this.message = "";
+    resetContent: function resetContent() {
+      this.content = "";
     }
   },
   data: function data() {
@@ -2029,7 +2029,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "comment-edit-form",
   props: ["submissionUrl", "tweetId", "commentId"],
   computed: {
-    message: {
+    content: {
       get: function get() {
         this.isStringAGIFUrl(this.$attrs.value);
         return this.$attrs.value;
@@ -2048,8 +2048,8 @@ __webpack_require__.r(__webpack_exports__);
 
       return false;
     },
-    resetMessage: function resetMessage() {
-      this.message = "";
+    resetContent: function resetContent() {
+      this.content = "";
     }
   },
   data: function data() {
@@ -2163,11 +2163,13 @@ __webpack_require__.r(__webpack_exports__);
   props: ["tweet", "liked"],
   data: function data() {
     return {
-      isLiked: ""
+      isLiked: "",
+      likeCount: ""
     };
   },
   mounted: function mounted() {
     this.isLiked = this.isLike ? true : false;
+    this.getLikeCount(this.tweet);
   },
   computed: {
     isLike: function isLike() {
@@ -2179,7 +2181,29 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.tweet("tweetLara/public/like" + tweet).then(function (response) {
-        return _this.isLiked = false;
+        _this.isLiked = true;
+
+        _this.getLikeCount(tweet);
+      })["catch"](function (response) {
+        return console.log(response.data);
+      });
+    },
+    unLike: function unLike(tweet) {
+      var _this2 = this;
+
+      axios.tweet("/tweetLara/public/unlike/" + tweet).then(function (response) {
+        _this2.isLiked = false;
+
+        _this2.getLikeCount(tweet);
+      })["catch"](function (response) {
+        return console.log(response.data);
+      });
+    },
+    getLikeCount: function getLikeCount(tweet) {
+      var _this3 = this;
+
+      axios.get("/tweetLara/public/like/" + post).then(function (response) {
+        return _this3.likeCount = response.data;
       });
     }
   }
@@ -37840,14 +37864,14 @@ var render = function() {
       _vm.isGif
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-12" }, [
-              _c("img", { attrs: { src: _vm.message } }),
+              _c("img", { attrs: { src: _vm.content } }),
               _vm._v(" "),
               _c(
                 "button",
                 {
                   staticClass: "btn",
                   attrs: { type: "button" },
-                  on: { click: _vm.resetMessage }
+                  on: { click: _vm.resetContent }
                 },
                 [_vm._v("Reset")]
               ),
@@ -37867,18 +37891,18 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.message,
-                    expression: "message"
+                    value: _vm.content,
+                    expression: "content"
                   }
                 ],
-                attrs: { type: "hidden", name: "message" },
-                domProps: { value: _vm.message },
+                attrs: { type: "hidden", name: "content" },
+                domProps: { value: _vm.content },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.message = $event.target.value
+                    _vm.content = $event.target.value
                   }
                 }
               }),
@@ -37899,19 +37923,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.message,
-                      expression: "message"
+                      value: _vm.content,
+                      expression: "content"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", name: "message" },
-                  domProps: { value: _vm.message },
+                  attrs: { type: "text", name: "content" },
+                  domProps: { value: _vm.content },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.message = $event.target.value
+                      _vm.content = $event.target.value
                     }
                   }
                 }),
@@ -37979,14 +38003,14 @@ var render = function() {
       _vm.isGif
         ? _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-12" }, [
-              _c("img", { attrs: { src: _vm.message } }),
+              _c("img", { attrs: { src: _vm.content } }),
               _vm._v(" "),
               _c(
                 "button",
                 {
                   staticClass: "btn",
                   attrs: { type: "button" },
-                  on: { click: _vm.resetMessage }
+                  on: { click: _vm.resetContent }
                 },
                 [_vm._v("Reset")]
               ),
@@ -38006,18 +38030,18 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.message,
-                    expression: "message"
+                    value: _vm.content,
+                    expression: "content"
                   }
                 ],
-                attrs: { type: "hidden", name: "message" },
-                domProps: { value: _vm.message },
+                attrs: { type: "hidden", name: "content" },
+                domProps: { value: _vm.content },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.message = $event.target.value
+                    _vm.content = $event.target.value
                   }
                 }
               }),
@@ -38029,28 +38053,28 @@ var render = function() {
             ])
           ])
         : _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "col-md-16" }, [
               _c("div", { staticClass: "form-group" }, [
-                _c("strong", [_vm._v("message")]),
+                _c("strong", [_vm._v("Edit your comment")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.message,
-                      expression: "message"
+                      value: _vm.content,
+                      expression: "content"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", name: "message" },
-                  domProps: { value: _vm.message },
+                  attrs: { type: "text", name: "content" },
+                  domProps: { value: _vm.content },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.message = $event.target.value
+                      _vm.content = $event.target.value
                     }
                   }
                 }),
@@ -38081,7 +38105,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("input", {
-          staticClass: "btn btn-warning",
+          staticClass: "btn btn",
           attrs: { type: "submit", value: "Update Comment" }
         })
       ])

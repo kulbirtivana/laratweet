@@ -43,6 +43,8 @@
                     display: block;
                     margin-left: auto;
                     margin-right: auto;
+                    height: 100px;
+                    width: 100px;
 
             }
 
@@ -83,11 +85,24 @@
                 justify-content: center;
                 background-color: #E0ECF4;
             }
+            h1{
+                font-size:20px;
+            }
+
+            h2{
+                font-size:18px;
+                padding: 10px;
+            }
+
+            .content{
+                background-color: white;
+            }
 
 
             .mainbanner{
                 width:100%;
-                height:600px;
+                height:auto;
+                background-color: white;
             }
 
             .position-ref {
@@ -127,6 +142,8 @@
 
             .social{
                 padding-bottom: 10px;
+                font-size: 20px;
+
             }
               .features, .use {
                 font-size: 28px;
@@ -175,7 +192,7 @@
 
             .register1{
                 background-color: white;
-                color:138BCC;
+                color:black bold;
                 padding: 10px;
                 font-size: 18px;
                 text-decoration: none;
@@ -206,17 +223,23 @@
                 margin-left: auto;
             }
 
-
             @media screen and (max-width: 800px)
             {
-                .uses img{
-                height:50px;
-                width:50px;
-            }
+                        .uses img{
+                        height:50px;
+                        width:50px;
+                    }
+
+                    .mainbanner img{
+                        width:70%;
+                        height:300px;
+                    }
             }    
 
             .footer{
                 font-size: 12px;
+                text-align: center;
+                padding: 10px;
             }
 
 * {
@@ -225,8 +248,8 @@
 }
 
 html, body {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: #f8f8f8;
 }
 
@@ -247,7 +270,7 @@ html, body {
     color: black;
 }
 
-.one, .two, .three, .four {
+.one, .two, .three, .four{
     background-color: #E0ECF4;
 }
 
@@ -256,75 +279,12 @@ html, body {
     color:white;
     padding: 10px;
 }
+
+
 .top {
     height: 400px;
     font-size: 30px;
 }
-/*html, body {
-    height: 100%;
-}
-
-.sections {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.section1 {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-    
-.section1.one {
-    background-color: #138BCC;
-}
-
-.section1.one h4{
-    color: white;
-    font-size: 18px;
-    margin: 0;
-    padding: 0;
-}
-.section1.one img{
-    width: auto
-    height: 400px;
-}
-
-.section1.two {
-    background-color: #138BCC;
-}
-
-.section1.two h4{
-    color: white;
-    font-size: 18px;
-    margin: 0;
-    padding: 0;
-}
-.section1.two img{
-    width: auto;
-    height: auto;
-}
-
-.section1.three {
-    background-color: #138BCC;
-}
-
-.section1.three h4{
-    color: white;
-    font-size: 18px;
-    margin: 0;
-    padding: 0;
-}
-.section1.three img{
-    width: auto;
-    height: auto;
-}
-
-
-.section1.four {
-    background-color: green;
-}*/
 
 </style>
     </head>
@@ -334,7 +294,7 @@ html, body {
             <div>
                        
                     <figure id="logo">
-                        <img src="{{ asset('images/LaraTweet-Logo.png')}}" title="LaraTweet Logo" alt="LaraTweet"><br><div class="laratext">LaraTweet- A Social Networking App</div>
+                        <img src="{{ asset('images/LaraTweet-Logo.png')}}" title="LaraTweet Logo" alt="LaraTweet"><br><div class="laratext"><h1>LaraTweet- A Social Networking App</h1></div>
                     </figure>
               
                     <nav id="navigation" class="menu">
@@ -363,17 +323,17 @@ html, body {
                         {{--<div class="title m-b-md">
                             LaraTweet
                         </div>--}}
-                    <figure>
-                        <img class=".img-responsive" class="container-fluid" class="mainbanner" src="{{ asset('images/LaraTweet-Main-Banner.jpg')}}">
+                    <figure class="mainbanner">
+                        <img class=".img-responsive" class="container-fluid" src="{{ asset('images/LaraTweet-Main-Banner.jpg')}}">
                     </figure>
                 </div>               
-                <p class="social" >A social networking site where people communicate in short messages called tweets</p>
-                    <div><a class="register" href="{{ route('register') }}">Register Here</a></div><br>
+                <p class="social" ><h2>A social networking site where people communicate in short messages called tweets</h2></p>
+                    <div><a class="register" href="{{ route('register') }}">Register Here to Learn More</a></div><br>
         </div>
                     
                 </div>
     
-  <section class="features"><h2>Features</h2>
+  <section class="features"><h3>Different features of LaraTweet</h3>
           <section>
             <div>
               <h3 class="featuresall">Tweets</h3>
@@ -399,7 +359,7 @@ html, body {
           </section>
 </section>
 
-    <section class="benefits">Benefits of LaraTweet
+    <section class="benefits"><h3>Why to use LaraTweet</h3>
 
             </div>
                <div id="container">
@@ -425,12 +385,12 @@ html, body {
         <p>
             <div class="uses">
                 <li>Brand Awareness<br><img src="images/brand-awareness.jpeg" alt="brand awareness" title="brand awareness"> </li>
-                <li>Generate leads<br><img src="images/brand-awareness.jpeg" alt="generate leads" title="generate awareness"></li>
+                <li>Generate leads<br><img src="images/generate-leads.jpeg" alt="generate leads" title="generate awareness"></li>
                 <br>
                 <br>
                 <p></p>
-                <li>Positive opinion<br><img src="images/brand-awareness.jpeg" alt="Positive Opinion" title="Positive Opinion"></li>
-                <li>Build community<br><img src="images/brand-awareness.jpeg" alt="Build Community" title="Build Community"></li>
+                <li>Positive opinion<br><img src="images/positive-opinion.png" alt="Positive Opinion" title="Positive Opinion"></li>
+                <li>Build community<br><img src="images/build-community.png" alt="Build Community" title="Build Community"></li>
             </div>
 
              <div><a class="register1" href="{{ route('register') }}">Register Here</a></div>
