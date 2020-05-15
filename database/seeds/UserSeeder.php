@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         //
         $faker = Factory::create();
 
-        foreach( range (1,30) as $index)
+        foreach( range (1,40) as $index)
         {
             DB::table( 'users' )->insert( array(
                 'name' => $faker->name,

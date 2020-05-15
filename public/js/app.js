@@ -50914,7 +50914,8 @@ var scene = new ScrollMagic.Scene({
   triggerElement: "#container",
   triggerHook: "onLeave",
   duration: "500%"
-}).setPin("#container").setTween(wipeAnimation).addIndicators().addTo(controller); // });
+}).setPin("#container").setTween(wipeAnimation) // .addIndicators() 
+.addTo(controller); // });
 
 /***/ }),
 

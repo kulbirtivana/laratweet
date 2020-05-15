@@ -54,13 +54,13 @@ LaraTweet
 
                 <small>{{ $tweet->posted_at }}</small>
 
-             {{--<div class="pull-right">
+             <div class="pull-right">
                     @if (Auth::check())
                     <like :tweet={{ $tweet->id }} :liked={{ $tweet->liked() ? 'true' : 'false' }}>
                     </like>
                     @endif
                     <span>{{ $tweet->likes()->count() }}</span>
-                </div>--}} 
+                </div>
 
             
                 @endauth

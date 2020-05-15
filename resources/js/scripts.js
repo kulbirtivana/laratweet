@@ -57,7 +57,7 @@ if (clickedElementP.is( ':hidden')){
 		})
 		.setPin("#container")
 		.setTween(wipeAnimation)
-		.addIndicators() 
+		// .addIndicators() 
 		.addTo(controller);
 
 			// });

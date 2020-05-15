@@ -9,8 +9,8 @@
          <link rel="shortcut icon" type="image/png" href="{{URL('images/LaraTweet-Logo.png')}}">
         <meta name=”robots” content="index, follow">
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+            <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
             <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenLite.min.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js"></script>
@@ -234,7 +234,23 @@
                         width:70%;
                         height:300px;
                     }
+
+                    #container{
+                        height:70vh;
+                    }
             }    
+
+
+
+            @media screen and (max-width: 500px)
+            {
+                 .mainbanner img{
+                    width:50%;
+                    height:200px;
+                    }
+
+            }
+
 
             .footer{
                 font-size: 12px;
@@ -280,6 +296,10 @@ html, body {
     padding: 10px;
 }
 
+.panel img, .panel img, .panel img, .panel img{
+    height:auto;
+
+}
 
 .top {
     height: 400px;
